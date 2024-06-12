@@ -16,3 +16,5 @@
   Users should get a confirmation after applying for a security
   ## Security Dashboard and notification
   Securities should be able to view their dashboards to see their schedules.
+Date starting from beginning of week to end of week
+Each recycler view will have a date, Name of location, arival time, end time, duration, 
