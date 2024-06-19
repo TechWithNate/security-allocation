@@ -8,80 +8,102 @@
     tools:context=".CreateProfile">
 
     <ImageView
+        android:id="@+id/user_img"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:contentDescription="User Image"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="50dp"
+        android:contentDescription="@string/user_image"
         android:scaleType="centerCrop"
-        android:src="@drawable/image_picker"
-        android:id="@+id/user_img"/>
+        android:src="@drawable/baseline_account_circle_24" />
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/baseline_add_a_photo"
+        android:layout_toEndOf="@+id/user_img"
+        android:layout_below="@+id/user_img"
+        android:layout_marginStart="-35dp"
+        android:layout_marginTop="-40dp"
+        android:id="@+id/img_picker"
+        android:contentDescription="@string/user_image" />
 
     <TextView
         android:id="@+id/tv_firstname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="First name"
+        android:layout_below="@+id/user_img"
         android:layout_marginStart="20dp"
-        android:textSize="15sp"
         android:layout_marginTop="30dp"
-        android:layout_below="@+id/user_img"/>
+        android:text="@string/first_name"
+        android:textSize="15sp" />
 
     <EditText
+        android:id="@+id/firstname"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/txt_bg"
-        android:layout_marginTop="10dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:hint="John"
         android:layout_below="@+id/tv_firstname"
-        android:textColorHint="#9F9F9F"
-        android:id="@+id/firstname"/>
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/txt_bg"
+        android:hint="@string/john"
+        android:textColor="@color/black"
+        android:textColorHint="#9F9F9F" />
 
 
     <TextView
         android:id="@+id/tv_lastname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Last name"
+        android:layout_below="@+id/firstname"
         android:layout_marginStart="20dp"
-        android:textSize="15sp"
         android:layout_marginTop="20dp"
-        android:layout_below="@+id/firstname"/>
+        android:text="@string/last_name"
+        android:textSize="15sp" />
 
     <EditText
+        android:id="@+id/lastname"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/txt_bg"
-        android:layout_marginTop="10dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:hint="Doe"
         android:layout_below="@+id/tv_lastname"
-        android:textColorHint="#9F9F9F"
-        android:id="@+id/lastname"/>
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/txt_bg"
+        android:hint="@string/doe"
+        android:textColor="@color/black"
+        android:textColorHint="#9F9F9F" />
+
+    <TextView
+        android:id="@+id/tv_gender"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/lastname"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/gender"
+        android:textSize="15sp" />
 
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/gender_layout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense.ExposedDropdownMenu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/gender_layout"
+        android:layout_below="@+id/tv_gender"
         android:layout_marginStart="20dp"
+        android:layout_marginTop="7dp"
         android:layout_marginEnd="20dp"
-        android:textColorHint="@color/black"
-        android:layout_below="@+id/lastname"
-        android:layout_marginTop="20dp"
-        android:hint="Gender"
-        style="@style/Widget.Design.TextInputLayout">
+        android:textColorHint="#757575">
 
         <AutoCompleteTextView
+            android:id="@+id/gender"
+            style="@style/CustomAutoCompleteTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/gender"
             android:inputType="none"
-            android:textSize="18sp"
-            android:background="@color/white"
-            android:textColor="@color/black"/>
+            android:textColor="@color/black"
+            android:textSize="18sp" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -90,61 +112,71 @@
         android:id="@+id/tv_tel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Contact"
+        android:layout_below="@+id/gender_layout"
         android:layout_marginStart="20dp"
-        android:textSize="15sp"
         android:layout_marginTop="20dp"
-        android:layout_below="@+id/gender_layout"/>
+        android:text="@string/contact"
+        android:textSize="15sp" />
 
     <EditText
+        android:id="@+id/tel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/txt_bg"
-        android:layout_marginTop="10dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:hint="054 665 1113"
         android:layout_below="@+id/tv_tel"
-        android:textColorHint="#9F9F9F"
-        android:id="@+id/tel"/>
-
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/txt_bg"
+        android:hint="@string/_054_665_1113"
+        android:inputType="phone"
+        android:textColor="@color/black"
+        android:textColorHint="#9F9F9F" />
 
 
     <TextView
         android:id="@+id/tv_address"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Address"
+        android:layout_below="@+id/tel"
         android:layout_marginStart="20dp"
-        android:textSize="15sp"
         android:layout_marginTop="20dp"
-        android:layout_below="@+id/tel"/>
+        android:text="@string/address"
+        android:textSize="15sp" />
 
     <EditText
+        android:id="@+id/address"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/txt_bg"
-        android:layout_marginTop="10dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:hint="Adress"
         android:layout_below="@+id/tv_address"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/txt_bg"
+        android:hint="@string/address"
+        android:textColor="@color/black"
         android:textColorHint="#9F9F9F"
-        android:id="@+id/address"/>
-
+        android:autofillHints="postalAddress" />
 
 
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/create_profile_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/address"
-        android:layout_marginTop="20dp"
         android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
-        app:cornerRadius="10dp"
+        android:text="@string/create_profile"
+        android:textColor="@color/white"
         app:backgroundTint="#536DFE"
-        android:text="Create Profile"/>
+        app:cornerRadius="10dp" />
 
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:id="@+id/progress_bar"
+        android:visibility="gone"/>
 
 
 </RelativeLayout>
