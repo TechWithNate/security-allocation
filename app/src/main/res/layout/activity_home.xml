@@ -12,6 +12,7 @@
 
 
         <LinearLayout
+            android:id="@+id/top_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
@@ -37,6 +38,7 @@
             android:layout_height="match_parent"
             android:id="@+id/nav_view"
             android:layout_gravity="start"
+            android:background="@color/white"
             app:headerLayout="@layout/nav_header"
             app:menu="@menu/nav_menu"
             app:itemIconTint="@color/primary_color"
@@ -44,48 +46,5 @@
 
 
 
-<!--    <ImageView-->
-<!--        android:id="@+id/user_img"-->
-<!--        android:layout_width="100dp"-->
-<!--        android:layout_height="100dp"-->
-<!--        android:layout_centerHorizontal="true"-->
-<!--        android:layout_marginTop="50dp"-->
-<!--        android:contentDescription="@string/user_image"-->
-<!--        android:scaleType="centerCrop"-->
-<!--        android:src="@drawable/baseline_account_circle_24" />-->
-
-<!--    <TextView-->
-<!--        android:id="@+id/full_name"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_below="@+id/user_img"-->
-<!--        android:layout_centerHorizontal="true"-->
-<!--        android:textColor="@color/black"-->
-<!--        android:layout_marginTop="7dp"-->
-<!--        android:text="John Doe"/>-->
-
-<!--    <TextView-->
-<!--        android:id="@+id/username"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_below="@+id/full_name"-->
-<!--        android:layout_centerHorizontal="true"-->
-<!--        android:textColor="@color/black"-->
-<!--        android:layout_marginTop="0dp"-->
-<!--        android:text="john"/>-->
-
-<!--    <TextView-->
-<!--        android:id="@+id/email"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_below="@+id/username"-->
-<!--        android:layout_centerHorizontal="true"-->
-<!--        android:textColor="@color/black"-->
-<!--        android:layout_marginTop="0dp"-->
-<!--        android:text="John@gmail.com"/>-->
-
-
-
-<!--    -->
 
 </androidx.drawerlayout.widget.DrawerLayout>
