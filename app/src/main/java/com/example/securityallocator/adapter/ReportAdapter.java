@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.securityallocator.R;
 import com.example.securityallocator.models.ReportModel;
 import com.squareup.picasso.Picasso;
@@ -37,7 +38,9 @@ public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.ViewHolder
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         ReportModel model = reportModels.get(position);
-        Picasso.get().load(model.getProfileImg()).into(holder.profileImg);
+        //Picasso.get().load(model.getProfileImg()).into(holder.profileImg);
+        //Picasso.get().load(model.getProfileImg()).into(holder.profileImg);
+        //Glide.with(context).load(model.getProfileImg).into(holder.profileImg);
         holder.username.setText(model.getUsername());
         holder.email.setText(model.getUserEmail());
         holder.report.setText(model.getReport());
