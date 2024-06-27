@@ -56,6 +56,7 @@ public class CreateProfile extends AppCompatActivity {
     private String gender;
     private Uri imageUri;
     private FirebaseAuth firebaseAuth;
+    private FirebaseUser firebaseUser;
     private FirebaseDatabase firebaseDatabase;
     private StorageReference storageReference;
     private FirebaseStorage firebaseStorage;
@@ -107,11 +108,10 @@ public class CreateProfile extends AppCompatActivity {
         progressBar = findViewById(R.id.progress_bar);
 
         firebaseAuth = FirebaseAuth.getInstance();
-        firebaseStorage = FirebaseStorage.getInstance();
-        storageReference = firebaseStorage.getReference();
-        firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference("users");
+        firebaseUser = firebaseAuth.getCurrentUser();
 
+        databaseReference = FirebaseDatabase.getInstance().getReference("users");
+        storageReference = FirebaseStorage.getInstance().getReference("Images");
     }
 
     private void checkFields(){
@@ -142,72 +142,81 @@ public class CreateProfile extends AppCompatActivity {
         finish();
     }
 
+
     private void sendDataForNewUser() {
-
-        FirebaseUser user = firebaseAuth.getCurrentUser();
-        if (null != user){
-
-            //UserModel userProfile = new UserModel(firebaseAuth.getUid(), etFirstname.getText().toString(), etLastname.getText().toString(), gender.toLowerCase(), etContact.getText().toString(), etAddress.getText().toString());
+        if (firebaseUser != null) {
             Map<String, Object> userProfile = new HashMap<>();
-            userProfile.put("userUID", firebaseAuth.getCurrentUser().getUid());
+            userProfile.put("userUID", firebaseUser.getUid());
             userProfile.put("firstname", etFirstname.getText().toString());
             userProfile.put("lastname", etLastname.getText().toString());
             userProfile.put("gender", gender.toLowerCase());
             userProfile.put("contact", etContact.getText().toString());
             userProfile.put("address", etAddress.getText().toString());
 
-
-            databaseReference.child(Objects.requireNonNull(firebaseAuth.getUid()))
-                    .updateChildren(userProfile)
-                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                @Override
-                public void onComplete(@NonNull Task<Void> task) {
-                    if (task.isSuccessful()){
-                        Toast.makeText(CreateProfile.this, "Profile Created Successfully", Toast.LENGTH_SHORT).show();
-                    }else {
-                        Toast.makeText(CreateProfile.this, Objects.requireNonNull(task.getException()).toString(), Toast.LENGTH_SHORT).show();
-                    }
-                }
-            });
+            // Upload the image first
+            sendImageToStorage(userProfile);
         }
-
-        sendImageToStorage();
-
     }
 
-    private void sendImageToStorage() {
-        storageReference.child("Images").child(Objects.requireNonNull(firebaseAuth.getUid())).child("Profile Pic");
+    private void sendImageToStorage(Map<String, Object> userProfile) {
+        if (imageUri != null) {
+            StorageReference imageRef = storageReference.child(firebaseUser.getUid()).child("Profile Pic");
 
-        Bitmap bitmap = null;
-        try {
-            bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), imageUri);
-        }catch (IOException e) {
-            throw new RuntimeException(e);
+            Bitmap bitmap;
+            try {
+                bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), imageUri);
+            } catch (IOException e) {
+                Toast.makeText(CreateProfile.this, "Image load failed", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 25, byteArrayOutputStream);
+            byte[] data = byteArrayOutputStream.toByteArray();
+
+            UploadTask uploadTask = imageRef.putBytes(data);
+            uploadTask.addOnSuccessListener(taskSnapshot ->
+                    imageRef.getDownloadUrl().addOnSuccessListener(uri -> {
+                        imageUriAccessToken = uri.toString();
+                        userProfile.put("imageURI", imageUriAccessToken);
+                        // Now update the database with user profile data including image URI
+                        updateUserProfile(userProfile);
+                    }).addOnFailureListener(e ->
+                            Toast.makeText(CreateProfile.this, "Image upload failed: " + e.getMessage(), Toast.LENGTH_SHORT).show()));
+        } else {
+            // If there's no image, just update the profile
+            updateUserProfile(userProfile);
         }
+    }
 
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 25, byteArrayOutputStream);
-        byte[] data = byteArrayOutputStream.toByteArray();
-
-        UploadTask uploadTask = storageReference.putBytes(data);
-        uploadTask.addOnSuccessListener(taskSnapshot ->
-                storageReference.getDownloadUrl().addOnSuccessListener(uri -> {
-            imageUriAccessToken = uri.toString();
-            Map<String, Object> image = new HashMap<>();
-            image.put("imageURI", imageUriAccessToken);
-            databaseReference.updateChildren(image).addOnSuccessListener(unused ->
-                    Toast.makeText(CreateProfile.this, "Image Loaded", Toast.LENGTH_SHORT).show());
-        }).addOnFailureListener(e ->
-                        Toast.makeText(CreateProfile.this, e.getMessage(), Toast.LENGTH_SHORT).show()));
+    private void updateUserProfile(Map<String, Object> userProfile) {
+        databaseReference.child(firebaseUser.getUid())
+                .updateChildren(userProfile)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        Toast.makeText(CreateProfile.this, "Profile Created Successfully", Toast.LENGTH_SHORT).show();
+                        openHomeActivity();
+                    } else {
+                        Toast.makeText(CreateProfile.this, "Profile creation failed: " + task.getException(), Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        if (requestCode == PICK_IMAGE && resultCode == RESULT_OK) {
-            assert data != null;
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == PICK_IMAGE && resultCode == RESULT_OK && data != null) {
             imageUri = data.getData();
             profileImage.setImageURI(imageUri);
         }
-        super.onActivityResult(requestCode, resultCode, data);
     }
+
+    private void openHomeActivity() {
+        Intent intent = new Intent(CreateProfile.this, Home.class);
+        startActivity(intent);
+        finish();
+    }
+
+
+
 }
