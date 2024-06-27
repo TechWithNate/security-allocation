@@ -89,6 +89,17 @@ public class ReportModel implements Parcelable {
     }
 
     @Override
+    public String toString() {
+        return "ReportModel{" +
+                "userID='" + userID + '\'' +
+                ", username='" + username + '\'' +
+                ", userEmail='" + userEmail + '\'' +
+                ", profileImg='" + profileImg + '\'' +
+                ", report='" + report + '\'' +
+                '}';
+    }
+
+    @Override
     public void writeToParcel(@NonNull Parcel dest, int flags) {
         dest.writeString(userID);
         dest.writeString(username);
