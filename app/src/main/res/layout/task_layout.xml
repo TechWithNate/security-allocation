@@ -2,8 +2,9 @@
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/white"
+    app:cardBackgroundColor="@color/white"
     app:cardCornerRadius="10dp"
+    android:layout_marginTop="10dp"
     app:cardElevation="5dp"
     android:layout_height="wrap_content">
 
@@ -16,6 +17,7 @@
             android:id="@+id/loc_layout"
             android:layout_width="wrap_content"
             android:layout_marginTop="10dp"
+            android:layout_marginEnd="0dp"
             android:layout_marginStart="10dp"
             android:layout_height="wrap_content">
 
@@ -28,14 +30,16 @@
                 android:contentDescription="Loc Icon"/>
 
             <TextView
+                android:id="@+id/location_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_toEndOf="@+id/loc_icon"
+                android:layout_marginEnd="20dp"
+                android:singleLine="true"
                 android:text="Accra Technical University"
                 android:textColor="@color/black"
-                android:textSize="15sp"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="10dp"
-                android:layout_toEndOf="@+id/loc_icon" />
+                android:textSize="15sp" />
 
         </RelativeLayout>
 
@@ -67,6 +71,7 @@
                 android:layout_toEndOf="@+id/s_time_icon" />
 
             <TextView
+                android:id="@+id/s_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="12:00 AM"
@@ -106,6 +111,7 @@
                 android:layout_toEndOf="@+id/e_time_icon" />
 
             <TextView
+                android:id="@+id/e_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="06:00 AM"
@@ -122,6 +128,30 @@
             android:layout_height="wrap_content"
             android:id="@+id/date"
             android:text="08/06/2024"
+            android:textColor="@color/black"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="10dp"
+            android:layout_marginTop="10dp"
+            android:textSize="15sp"/>
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/baseline_phone"
+            android:layout_toStartOf="@+id/contact"
+            android:layout_marginEnd="5dp"
+            android:layout_centerVertical="true"
+            android:id="@+id/contact_icon"
+            android:contentDescription="Time Icon"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/contact"
+            android:text="0XX XXX XXXX"
+            android:layout_below="@+id/date"
+            android:textColor="@color/black"
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="10dp"
             android:layout_marginTop="10dp"
