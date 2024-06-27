@@ -44,6 +44,8 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
         holder.email.setText(user.getEmail());
         Picasso.get().load(user.profileImg).into(holder.profileImg);
 
+
+
         holder.itemView.setOnClickListener(v -> {
             userClicked.userItemClicked(position);
         });
