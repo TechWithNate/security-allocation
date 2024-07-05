@@ -68,8 +68,9 @@
 
         <ImageView
             android:layout_width="30dp"
+            android:background="@color/white"
             android:layout_height="30dp"
-            android:src="@drawable/baseline_add_a_photo"
+            android:src="@drawable/baseline_autorenew"
             android:layout_toEndOf="@+id/profile_img_card"
             android:layout_below="@+id/profile_img_card"
             android:layout_marginStart="-35dp"
@@ -201,7 +202,7 @@
             android:layout_marginTop="7dp"
             android:layout_marginEnd="20dp"
             android:background="@drawable/txt_bg"
-            android:hint="@string/_054_665_1113"
+            android:hint="@string/_0xx_xxx_xxxx"
             android:inputType="phone"
             android:textColor="@color/black"
             android:textColorHint="#9F9F9F" />
@@ -213,7 +214,7 @@
             android:id="@+id/tv_address"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Address"
+            android:text="@string/address"
             android:layout_marginStart="20dp"
             android:textSize="15sp"
             android:layout_marginTop="30dp"
@@ -226,7 +227,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
-            android:hint="Adress"
+            android:hint="@string/address"
             android:textColor="@color/black"
             android:id="@+id/et_address"
             android:layout_below="@+id/tv_address"
