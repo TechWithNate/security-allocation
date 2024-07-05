@@ -205,6 +205,7 @@
             android:id="@+id/edit_profile_btn"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
+            android:textColor="@color/white"
             app:cornerRadius="10dp"
             android:text="Edit Profile"/>
 

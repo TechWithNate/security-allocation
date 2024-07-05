@@ -164,7 +164,6 @@ public class EditProfile extends AppCompatActivity {
         }
     }
 
-
     private void updateUserProfile() {
         progressBar.setVisibility(View.VISIBLE);
         FirebaseUser user = firebaseAuth.getCurrentUser();
@@ -174,7 +173,7 @@ public class EditProfile extends AppCompatActivity {
             // Get updated values from UI components
             String updatedFirstname = etFirstname.getText().toString().trim();
             String updatedLastname = etLastname.getText().toString().trim();
-            String updatedGender = gender.toLowerCase();
+            String updatedGender = gender;
             String updatedContact = etContact.getText().toString().trim();
             String updatedAddress = etAddress.getText().toString().trim();
 
@@ -186,22 +185,36 @@ public class EditProfile extends AppCompatActivity {
             updatedUserProfile.put("contact", updatedContact);
             updatedUserProfile.put("address", updatedAddress);
 
-            // Update the values in the database
-            databaseReference.child(userId).updateChildren(updatedUserProfile).addOnCompleteListener(task -> {
-                if (task.isSuccessful()) {
-                    // If image needs to be updated, call the method to handle image upload
-                    if (imageUri != null) {
-                        uploadProfileImage(userId);
+            if (etFirstname.getText().toString().isEmpty()){
+                Toast.makeText(this, "Enter firstname", Toast.LENGTH_SHORT).show();
+            }else if (etLastname.getText().toString().isEmpty()){
+                Toast.makeText(this, "Enter lastname", Toast.LENGTH_SHORT).show();
+            }else if (genderAutoComplete.getText().toString().isEmpty()){
+                Toast.makeText(this, "Select Gender", Toast.LENGTH_SHORT).show();
+            }else if (etContact.getText().toString().isEmpty()){
+                Toast.makeText(this, "Enter Contact", Toast.LENGTH_SHORT).show();
+            }else if (etAddress.getText().toString().isEmpty()){
+                Toast.makeText(this, "Enter Address", Toast.LENGTH_SHORT).show();
+            }else {
+                // Update the values in the database
+                databaseReference.child(userId).updateChildren(updatedUserProfile).addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        // If image needs to be updated, call the method to handle image upload
+                        if (imageUri != null) {
+                            uploadProfileImage(userId);
+                        } else {
+                            goToHomePage();
+                            progressBar.setVisibility(View.GONE);
+                            Toast.makeText(EditProfile.this, "Profile Updated Successfully", Toast.LENGTH_SHORT).show();
+                        }
                     } else {
-                        goToHomePage();
+                        Toast.makeText(EditProfile.this, "Failed to update profile: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                         progressBar.setVisibility(View.GONE);
-                        Toast.makeText(EditProfile.this, "Profile Updated Successfully", Toast.LENGTH_SHORT).show();
                     }
-                } else {
-                    Toast.makeText(EditProfile.this, "Failed to update profile: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                    progressBar.setVisibility(View.GONE);
-                }
-            });
+                });
+            }
+
+
         } else {
             Toast.makeText(EditProfile.this, "User is not logged in", Toast.LENGTH_SHORT).show();
             progressBar.setVisibility(View.GONE);

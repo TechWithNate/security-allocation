@@ -30,6 +30,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Objects;
+
 public class CreateAccount extends AppCompatActivity {
 
     private EditText etEmail;
@@ -124,6 +126,47 @@ public class CreateAccount extends AppCompatActivity {
         });
     }
 
+    private void checkUserRole(String userId) {
+        mDatabase.child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    String role = snapshot.child("role").getValue(String.class);
+                    if (role != null) {
+                        if (role.equals("admin")) {
+                            Intent intent = new Intent(CreateAccount.this, AdminPage.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            startActivity(intent);
+                            finish();
+                        } else {
+                            for (DataSnapshot dataSnapshot: snapshot.getChildren()){
+                                if (!Objects.requireNonNull(dataSnapshot.getValue(String.class)).isEmpty()){
+                                    Intent intent = new Intent(CreateAccount.this, Home.class);
+                                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                    startActivity(intent);
+                                    finish();
+                                }
+                            }
+                            Intent intent = new Intent(CreateAccount.this, CreateProfile.class);
+                            //intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            startActivity(intent);
+                            finish();
+                        }
+                        finish();
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Failed to get user role!", Toast.LENGTH_LONG).show();
+                    }
+                } else {
+                    Toast.makeText(getApplicationContext(), "User does not exist!", Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(getApplicationContext(), "Failed to get user role: " + error.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+    }
     private void checkFields() {
         if (etUsername.getText().toString().isEmpty()) {
             Toast.makeText(this, "Enter username", Toast.LENGTH_SHORT).show();
@@ -165,33 +208,22 @@ public class CreateAccount extends AppCompatActivity {
     }
 
     // Check User Role
-    private void checkUserRole(String userId) {
-        mDatabase.child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()) {
-                    String role = snapshot.child("role").getValue(String.class);
-                    if (role != null) {
-                        if (role.equals("admin")) {
-                            startActivity(new Intent(CreateAccount.this, AdminPage.class));
-                        } else {
-                            startActivity(new Intent(CreateAccount.this, CreateProfile.class));
-                        }
-                        finish();
-                    } else {
-                        Toast.makeText(getApplicationContext(), "Failed to get user role!", Toast.LENGTH_LONG).show();
-                    }
-                } else {
-                    Toast.makeText(getApplicationContext(), "User does not exist!", Toast.LENGTH_LONG).show();
-                }
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(getApplicationContext(), "Failed to get user role: " + error.getMessage(), Toast.LENGTH_LONG).show();
-            }
-        });
+
+    @Override
+    protected void onStart() {
+
+        FirebaseUser user = firebaseAuth.getCurrentUser();
+        if (null != user){
+            checkUserRole(firebaseAuth.getUid());
+//            //Intent intent = new Intent(CreateAccount.this, Home.class);
+//            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//            startActivity(intent);
+//            finish();
+//            Toast.makeText(this, "Not null User", Toast.LENGTH_SHORT).show();
+        }
+
+        super.onStart();
     }
-
 
 }

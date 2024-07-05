@@ -42,8 +42,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
         UserModel user = users.get(position);
         holder.name.setText(user.getFirstname() + " " +user.getLastname());
         holder.email.setText(user.getEmail());
-        Picasso.get().load(user.profileImg).into(holder.profileImg);
-
+        Picasso.get().load(user.getProfileImg()).into(holder.profileImg);
 
 
         holder.itemView.setOnClickListener(v -> {

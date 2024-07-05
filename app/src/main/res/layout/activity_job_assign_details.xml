@@ -7,12 +7,17 @@
     android:background="@color/white"
     tools:context=".JobAssignDetails">
 
+
+
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <RelativeLayout
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="0dp"
+            android:paddingTop="10dp"
             android:id="@+id/toolbar"
+            android:background="@color/primary_color"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -22,14 +27,16 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="20dp"
-                android:src="@drawable/baseline_arrow_back" />
+                android:src="@drawable/baseline_arrow_back"
+                android:contentDescription="@string/back_button" />
 
             <TextView
+                android:id="@+id/title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:text="Assign User"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textSize="20sp" />
 
         </RelativeLayout>
@@ -39,7 +46,7 @@
         android:layout_below="@+id/toolbar"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="30dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/user_detail_layout">
@@ -58,7 +65,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:contentDescription="@string/user_image"
-                android:id="@+id/user_img"
+                android:id="@+id/profile_img"
                 android:scaleType="centerCrop"
                 android:src="@drawable/baseline_account_circle_24"/>
 
@@ -120,7 +127,7 @@
             android:layout_below="@+id/detail_txt"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="7dp"
-            android:text="Location"
+            android:text="Job Location"
             android:textColor="@color/black"
             android:textSize="15sp" />
 
@@ -166,7 +173,7 @@
             android:layout_below="@+id/location_url"
             android:layout_marginTop="15dp"
             android:layout_marginBottom="7dp"
-            android:text="Shift"
+            android:text="@string/shift"
             android:textColor="@color/black"
             android:textSize="15sp" />
 
@@ -175,7 +182,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/shift_txt"
-            android:layout_marginTop="7dp"
+            android:layout_marginTop="0dp"
             style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense.ExposedDropdownMenu"
             android:textColorHint="#757575">
 
@@ -512,22 +519,27 @@
 
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/create_btn"
+            android:id="@+id/assign_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/contact"
             android:layout_marginTop="15dp"
             android:textColor="@color/white"
             android:text="Assign Task"
+            android:layout_marginBottom="20dp"
             app:backgroundTint="#536DFE"
             app:cornerRadius="10dp" />
 
-        <!--        ;asjdf ioas;dfj-->
-
-
-
 
     </RelativeLayout>
+
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:id="@+id/progress_bar"
+            android:visibility="gone"/>
 
     </RelativeLayout>
 

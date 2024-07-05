@@ -21,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.securityallocator.fragments.AboutFragment;
 import com.example.securityallocator.fragments.ProfileFragment;
 import com.example.securityallocator.fragments.HomeFragment;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -115,13 +116,15 @@ public class Home extends AppCompatActivity {
                     startActivity(Intent.createChooser(shareIntent, "Share link using"));
                 } else if (itemId == R.id.nav_about) {
                     // About Us
-                    Toast.makeText(Home.this, "This is: "+item.getTitle(), Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(Home.this, "This is: "+item.getTitle(), Toast.LENGTH_SHORT).show();
+                    toolbar.setTitle("About");
+                    replaceFragment(new AboutFragment());
                 } else if (itemId == R.id.nav_logout) {
                     // Logout User
                     firebaseAuth.signOut();
                     startActivity(new Intent(Home.this, Login.class));
                     finish();
-                    Toast.makeText(Home.this, "This is: "+item.getTitle(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Home.this, "Logout Successful", Toast.LENGTH_SHORT).show();
                 }
 
                 return false;
@@ -142,10 +145,7 @@ public class Home extends AppCompatActivity {
     }
 
     private void initViews(){
-//        profileImage = findViewById(R.id.profile_img);
-//        username = findViewById(R.id.username);
-//        fullName = findViewById(R.id.full_name);
-//        email = findViewById(R.id.email);
+
 
         navigationView = findViewById(R.id.nav_view);
         firebaseAuth = FirebaseAuth.getInstance();
@@ -162,48 +162,6 @@ public class Home extends AppCompatActivity {
         fragmentTransaction.replace(R.id.frame_layout, fragment);
         fragmentTransaction.commit();
     }
-
-//    private void fetchUserProfile() {
-//        if (firebaseUser != null) {
-//            String userId = firebaseUser.getUid();
-//            databaseReference.child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
-//                @SuppressLint("SetTextI18n")
-//                @Override
-//                public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                    if (snapshot.exists()) {
-//                        // Extract user profile data
-//                        String db_username = snapshot.child("username").getValue(String.class);
-//                        String db_email = snapshot.child("email").getValue(String.class);
-//                        String firstname = snapshot.child("firstname").getValue(String.class);
-//                        String lastname = snapshot.child("lastname").getValue(String.class);
-//                        String imageUri = snapshot.child("imageURI").getValue(String.class);
-//
-//                        // Populate UI components
-//                        username.setText(firstname + " " + lastname);
-//                        email.setText(db_email);
-////                        etFirstname.setText(firstname);
-////                        etLastname.setText(lastname);
-//                        if (imageUri != null && !imageUri.isEmpty()) {
-//                            loadImageFromUri(imageUri);
-//                        }
-//                    } else {
-//                        Toast.makeText(Home.this, "Profile does not exist", Toast.LENGTH_SHORT).show();
-//                    }
-//                }
-//
-//                @Override
-//                public void onCancelled(@NonNull DatabaseError error) {
-//                    Toast.makeText(Home.this, "Failed to fetch profile: " + error.getMessage(), Toast.LENGTH_SHORT).show();
-//                }
-//            });
-//        }
-//    }
-//
-//    private void loadImageFromUri(String imageUri) {
-//        Glide.with(this)
-//                .load(imageUri)
-//                .into(profileImage);
-//    }
 
 
     private void fetchUserProfile() {

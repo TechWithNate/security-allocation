@@ -9,6 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.securityallocator.JobDetails;
 import com.example.securityallocator.R;
 import com.example.securityallocator.models.TaskModel;
 
@@ -18,10 +19,16 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
 
     private ArrayList<TaskModel> models;
     private Context context;
+    private JobDetailClickListener jobDetailClickListener;
 
-    public TaskAdapter(ArrayList<TaskModel> models, Context context) {
+    public interface JobDetailClickListener{
+        void jobDetailClicked(int position);
+    }
+
+    public TaskAdapter(ArrayList<TaskModel> models, Context context, JobDetailClickListener jobDetailClickListener) {
         this.models = models;
         this.context = context;
+        this.jobDetailClickListener = jobDetailClickListener;
     }
 
 
@@ -38,9 +45,8 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
         holder.locationName.setText(task.getLocationName());
         holder.sTime.setText(task.getsTime());
         holder.eTime.setText(task.geteTime());
-        holder.date.setText(task.getDate());
-        holder.contact.setText(task.getContact());
 
+        holder.itemView.setOnClickListener(v -> jobDetailClickListener.jobDetailClicked(position));
     }
 
     @Override
@@ -61,8 +67,8 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
             locationName = itemView.findViewById(R.id.location_name);
             sTime = itemView.findViewById(R.id.s_time);
             eTime = itemView.findViewById(R.id.e_time);
-            contact = itemView.findViewById(R.id.contact);
-            date = itemView.findViewById(R.id.date);
+            //contact = itemView.findViewById(R.id.contact);
+            //date = itemView.findViewById(R.id.date);
 
         }
     }

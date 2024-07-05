@@ -51,9 +51,7 @@ public class Login extends AppCompatActivity {
             startActivity(new Intent(Login.this, CreateAccount.class));
             finish();
         });
-        adminBtn.setOnClickListener(v -> {startActivity(new Intent(Login.this, AdminLogin.class));
-            finish();
-        });
+
 
 
     }
@@ -63,7 +61,6 @@ public class Login extends AppCompatActivity {
         etPassword = findViewById(R.id.password);
         loginBtn = findViewById(R.id.login_btn);
         signupBtn = findViewById(R.id.signup_btn);
-        adminBtn = findViewById(R.id.admin_btn);
         progressBar = findViewById(R.id.progress_bar);
     }
 

@@ -178,7 +178,7 @@ public class CreateProfile extends AppCompatActivity {
             uploadTask.addOnSuccessListener(taskSnapshot ->
                     imageRef.getDownloadUrl().addOnSuccessListener(uri -> {
                         imageUriAccessToken = uri.toString();
-                        userProfile.put("imageURI", imageUriAccessToken);
+                        userProfile.put("profileImg", imageUriAccessToken);
                         // Now update the database with user profile data including image URI
                         updateUserProfile(userProfile);
                     }).addOnFailureListener(e ->

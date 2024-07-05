@@ -62,7 +62,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Start Time"
+                android:text="From: "
                 android:textColor="@color/black"
                 android:textSize="15sp"
                 android:layout_centerVertical="true"
@@ -88,7 +88,8 @@
             android:layout_width="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_marginStart="10dp"
-            android:layout_below="@+id/s_time_layout"
+            android:layout_below="@+id/loc_layout"
+            android:layout_alignParentEnd="true"
             android:layout_height="wrap_content">
 
             <ImageView
@@ -102,7 +103,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="End Time"
+                android:text="TO: "
                 android:textColor="@color/black"
                 android:textSize="15sp"
                 android:layout_centerVertical="true"
@@ -123,39 +124,7 @@
 
         </RelativeLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/date"
-            android:text="08/06/2024"
-            android:textColor="@color/black"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="10dp"
-            android:layout_marginTop="10dp"
-            android:textSize="15sp"/>
 
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/baseline_phone"
-            android:layout_toStartOf="@+id/contact"
-            android:layout_marginEnd="5dp"
-            android:layout_centerVertical="true"
-            android:id="@+id/contact_icon"
-            android:contentDescription="Time Icon"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/contact"
-            android:text="0XX XXX XXXX"
-            android:layout_below="@+id/date"
-            android:textColor="@color/black"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="10dp"
-            android:layout_marginTop="10dp"
-            android:textSize="15sp"/>
 
     </RelativeLayout>
 
