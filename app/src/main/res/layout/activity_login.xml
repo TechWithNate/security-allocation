@@ -86,8 +86,6 @@
         android:layout_below="@+id/password_txt"
         android:inputType="textPassword" />
 
-
-
     <com.google.android.material.button.MaterialButton
         android:id="@+id/login_btn"
         android:layout_width="match_parent"
