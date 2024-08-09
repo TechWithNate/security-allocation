@@ -83,13 +83,7 @@ public class CreateProfile extends AppCompatActivity {
             Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
             startActivityForResult(intent, PICK_IMAGE);
         });
-
-
-
-
-
-
-
+        
 
         createProfileBtn.setOnClickListener(v -> {
             checkFields();
