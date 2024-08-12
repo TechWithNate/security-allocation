@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">Security allocator</string>
+    <string name="logo">Logo</string>
+    <string name="create_an_account">Create an Account</string>
+    <string name="username">Username</string>
+    <string name="johnd">johnd</string>
+    <string name="email">Email</string>
+    <string name="example_gmail_com">example@gmail.com</string>
+    <string name="role">Role</string>
+    <string name="select_role">Select Role</string>
+    <string name="password">Password</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="create_account">Create Account</string>
+    <string name="login">Login</string>
+    <string name="user_image">User Image</string>
+    <string name="first_name">First name</string>
+    <string name="john">John</string>
+    <string name="last_name">Last name</string>
+    <string name="doe">Doe</string>
+    <string name="gender">Gender</string>
+    <string name="contact">Contact</string>
+    <string name="_054_665_1113">054 665 1113</string>
+    <string name="address">Address</string>
+    <string name="create_profile">Create Profile</string>
+    <string name="open_nav">Open Navigation Drawer</string>
+    <string name="close_nav">Close Navigation Drawer</string>
+    <string name="dummy_txt">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</string>
+    <string name="back_button">Back Button</string>
+    <string name="shift">Shift</string>
+    <string name="logout">Logout</string>
+    <string name="reports">Reports</string>
+    <string name="_0xx_xxx_xxxx">0XX XXX XXXX</string>
+</resources>
