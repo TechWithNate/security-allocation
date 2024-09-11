@@ -179,7 +179,7 @@ public class Home extends AppCompatActivity {
                         String db_email = snapshot.child("email").getValue(String.class);
                         String firstname = snapshot.child("firstname").getValue(String.class);
                         String lastname = snapshot.child("lastname").getValue(String.class);
-                        String imageUri = snapshot.child("imageURI").getValue(String.class);
+                        String imageUri = snapshot.child("profileImg").getValue(String.class);
 
                         // Populate UI components
                         username.setText(firstname + " " + lastname);

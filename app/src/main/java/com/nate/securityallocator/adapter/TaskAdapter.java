@@ -45,6 +45,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
         holder.locationName.setText(task.getLocationName());
         holder.sTime.setText(task.getsTime());
         holder.eTime.setText(task.geteTime());
+        holder.contact.setText(task.getContact());
 
         holder.itemView.setOnClickListener(v -> jobDetailClickListener.jobDetailClicked(position));
     }
@@ -67,8 +68,8 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
             locationName = itemView.findViewById(R.id.location_name);
             sTime = itemView.findViewById(R.id.s_time);
             eTime = itemView.findViewById(R.id.e_time);
-            //contact = itemView.findViewById(R.id.contact);
-            //date = itemView.findViewById(R.id.date);
+            contact = itemView.findViewById(R.id.contact);
+            date = itemView.findViewById(R.id.date);
 
         }
     }

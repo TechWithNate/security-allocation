@@ -147,10 +147,10 @@ public class CreateAccount extends AppCompatActivity {
                                     finish();
                                 }
                             }
-                            Intent intent = new Intent(CreateAccount.this, CreateProfile.class);
-                            //intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                            startActivity(intent);
-                            finish();
+//                            Intent intent = new Intent(CreateAccount.this, CreateProfile.class);
+//                            //intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//                            startActivity(intent);
+//                            finish();
                         }
                         finish();
                     } else {
@@ -216,11 +216,10 @@ public class CreateAccount extends AppCompatActivity {
         FirebaseUser user = firebaseAuth.getCurrentUser();
         if (null != user){
             checkUserRole(firebaseAuth.getUid());
-//            //Intent intent = new Intent(CreateAccount.this, Home.class);
+//            Intent intent = new Intent(CreateAccount.this, Home.class);
 //            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
 //            startActivity(intent);
 //            finish();
-//            Toast.makeText(this, "Not null User", Toast.LENGTH_SHORT).show();
         }
 
         super.onStart();

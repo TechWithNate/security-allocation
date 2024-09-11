@@ -114,7 +114,7 @@ public class ProfileFragment extends Fragment {
                         String gender = snapshot.child("gender").getValue(String.class);
                         String contact = snapshot.child("contact").getValue(String.class);
                         String address = snapshot.child("address").getValue(String.class);
-                        String imageUri = snapshot.child("imageURI").getValue(String.class);
+                        String imageUri = snapshot.child("profileImg").getValue(String.class);
 
                         // Populate UI components
                         tvUsername.setText(username);
